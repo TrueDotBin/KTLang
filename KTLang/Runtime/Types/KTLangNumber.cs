@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace KTLang.Runtime.Types
@@ -32,7 +33,7 @@ namespace KTLang.Runtime.Types
 
         /// <inheritdoc/>
         public override string ToString()
-            => Value.ToString();
+            => Value.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Adds the left and right values.

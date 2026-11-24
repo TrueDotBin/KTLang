@@ -1,6 +1,7 @@
 ﻿using KTLang.Runtime.Types;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace KTLang.Tokenizer
@@ -215,7 +216,7 @@ namespace KTLang.Tokenizer
             }
 
             string value = _input.Substring(_start, _position - _start);
-            return new(double.Parse(value));
+            return new(double.Parse(value, CultureInfo.InvariantCulture));
         }
 
         private (TokenType Type, KTLangType? Value) Identifier()
