@@ -1,6 +1,6 @@
 # KTLang
 
-**KTLang** is a programming language designed for Katro.
+**KTLang** is a programming language originally designed for Katro.
 
 KTLang is an interpreted language, meaning it does not compile to a native executable (e.g., `.exe` or `.elf`)
 
