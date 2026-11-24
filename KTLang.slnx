@@ -1,4 +1,5 @@
 <Solution>
-  <Project Path="KTLang/KTLang.csproj" />
+  <Project Path="KTLang.Cli/KTLang.Cli.csproj" Id="38745750-3eb2-4c62-988c-141b931e1831" />
   <Project Path="KTLang.TestApp/KTLang.TestApp.csproj" />
+  <Project Path="KTLang/KTLang.csproj" />
 </Solution>
