@@ -20,7 +20,7 @@ namespace KTLang.TestApp
                 Console.WriteLine("[Lexer] Tokenizing input");
 
                 var lexer = new Lexer(source);
-                var tokens = lexer.Parse();
+                var tokens = lexer.Tokenize();
 
                 Console.WriteLine($"[Lexer] {tokens.Count} token(s)");
 

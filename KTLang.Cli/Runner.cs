@@ -16,7 +16,7 @@ namespace KTLang.Cli
 
         private static void RunLine(string line, Interpreter interpreter)
         {
-            var tokens = new Lexer(line).Parse();
+            var tokens = new Lexer(line).Tokenize();
             var statements = new Parser(tokens).Parse();
 
             interpreter.Interpret(statements);
@@ -33,7 +33,7 @@ namespace KTLang.Cli
 
             var source = File.ReadAllText(path);
 
-            var tokens = new Lexer(source).Parse();
+            var tokens = new Lexer(source).Tokenize();
             var statements = new Parser(tokens).Parse();
 
             _globalInterpreter.Interpret(statements);

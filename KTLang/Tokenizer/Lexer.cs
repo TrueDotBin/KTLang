@@ -127,7 +127,7 @@ namespace KTLang.Tokenizer
         /// <summary>
         /// Parses the provided source code into a list of tokens.
         /// </summary>
-        public List<Token> Parse()
+        public List<Token> Tokenize()
         {
             var tokens = new List<Token>();
 
