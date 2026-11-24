@@ -27,6 +27,29 @@ namespace KTLang.Tokenizer
             { "while", TokenType.While }
         };
 
+        /// <summary>
+        /// Parses the provided source code into a list of tokens.
+        /// </summary>
+        public List<Token> Tokenize()
+        {
+            var tokens = new List<Token>();
+
+            while (!IsAtEnd())
+            {
+                _start = _position;
+
+                var token = ScanToken();
+
+                if (token is not null)
+                    tokens.Add(token);
+            }
+
+            var eof = new Token(TokenType.Eof, "", null, _line);
+            tokens.Add(eof);
+
+            return tokens;
+        }
+
         private Token? ScanToken()
         {
             var c = Advance();
@@ -122,29 +145,6 @@ namespace KTLang.Tokenizer
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// Parses the provided source code into a list of tokens.
-        /// </summary>
-        public List<Token> Tokenize()
-        {
-            var tokens = new List<Token>();
-
-            while (!IsAtEnd())
-            {
-                _start = _position;
-
-                var token = ScanToken();
-
-                if (token is not null)
-                    tokens.Add(token);
-            }
-
-            var eof = new Token(TokenType.Eof, "", null, _line);
-            tokens.Add(eof);
-
-            return tokens;
         }
 
         private char Advance()
