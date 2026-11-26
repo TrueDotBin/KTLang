@@ -36,7 +36,7 @@ namespace KTLang.Parsing
             if (Match(TokenType.Fn))
                 return FunctionDecl();
 
-            if (Match(TokenType.Var))
+            if (Match(TokenType.Var) || Match(TokenType.Const))
                 return VariableDecl();
 
             return Statement();
@@ -68,6 +68,7 @@ namespace KTLang.Parsing
 
         private VariableStatement VariableDecl()
         {
+            var isConst = Previous().Type == TokenType.Const;
             var name = Consume(TokenType.Identifier, "Expected variable name");
 
             Expression? initializer = null;
@@ -75,7 +76,7 @@ namespace KTLang.Parsing
                 initializer = Expression();
 
             Consume(TokenType.Semicolon, "Expected semicolon after variable decleration");
-            return new VariableStatement(name, initializer);
+            return new VariableStatement(name, initializer, isConst);
         }
 
         private Statement Statement()

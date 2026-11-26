@@ -144,10 +144,7 @@ namespace KTLang.Tokenizer
         /// </summary>
         False,
 
-        /// <summary>
-        /// Variable keyword
-        /// </summary>
-        Var,
+        Var, Const,
         If, Else,
         While,
         Fn, Return,

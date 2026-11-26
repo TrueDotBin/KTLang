@@ -226,8 +226,7 @@ namespace KTLang.Runtime
             if (string.IsNullOrEmpty(name))
                 return null;
 
-            var value = _env.Get(name);
-
+            var value = _env.Get(name).Value;
             return value is null ? throw new Exception($"Variable {name} was used before being assigned") : value;
         }
 
@@ -280,7 +279,7 @@ namespace KTLang.Runtime
                 if (BuiltinsRegistry.Registry.TryGetValue(name, out var builtin))
                     return builtin(args, _host);
 
-                var variable = _env.Get(name);
+                var variable = _env.Get(name).Value;
 
                 if (variable is KTLangFunction func)
                     return func.Call(this, args, _host);
@@ -349,7 +348,7 @@ namespace KTLang.Runtime
             if (var.Initializer is not null)
                 value = Evaluate(var.Initializer);
 
-            _env.Define(name, value);
+            _env.Define(name, value, var.Constant);
         }
 
         private void ExecBlockStatement(BlockStatement block)

@@ -19,6 +19,7 @@ namespace KTLang.Tokenizer
         private static readonly Dictionary<string, TokenType> _keywords = new()
         {
             { "var", TokenType.Var },
+            { "const", TokenType.Const },
             { "if", TokenType.If },
             { "else", TokenType.Else },
             { "return", TokenType.Return },

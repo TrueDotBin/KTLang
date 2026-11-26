@@ -12,7 +12,9 @@ namespace KTLang.TestApp
         {
             if (stmt is VariableStatement varStmt)
             {
-                Console.WriteLine($"{indent}Var: {varStmt.Name.RawString}");
+                var constMarker = varStmt.Constant ? "(Constant)" : "(Not Constant)";
+                Console.WriteLine($"{indent}Var: {varStmt.Name.RawString} " + constMarker);
+
                 if (varStmt.Initializer != null) PrintAst(varStmt.Initializer, indent + "  ");
             }
             else if (stmt is ExpressionStatement exprStmt)
