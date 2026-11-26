@@ -149,9 +149,8 @@ namespace KTLang.Tokenizer
         /// </summary>
         Var,
         If, Else,
-        While, For,
+        While,
         Fn, Return,
-        Println,
 
         /// <summary>
         /// The end of the file.
