@@ -7,11 +7,18 @@ fn mathModuleTest()
 	println("pi =", math.PI);
 	println("e =", math.E);
 	println("tau =", math.TAU);
+	println("infinity =", math.INF);
+	println("negative infinity =", math.NEGINF);
+	println("NaN =", math.NAN);
 
 	var sampleNumber = 50;
+	var sampleNegativeNumber = -sampleNumber;
+
 	var squareRoot = math.sqrt(sampleNumber);
+	var absolute = math.abs(sampleNegativeNumber);
 
 	println("The square root of", sampleNumber, "is", squareRoot);
+	println("The absolute value of", sampleNegativeNumber, "is", absolute);
 }
 
 fn log(source, message)
