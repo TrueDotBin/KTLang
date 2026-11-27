@@ -22,7 +22,6 @@ namespace KTLang.Builtins
         {
             { "println", CoreBuiltins.PrintLn },
             { "print", CoreBuiltins.Print },
-            { "len", CoreBuiltins.Len },
             { "toString", CoreBuiltins.ToStr },
             { "toNumber", CoreBuiltins.ToNum }
         };
