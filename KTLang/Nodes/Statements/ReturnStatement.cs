@@ -7,7 +7,7 @@ using System.Text;
 namespace KTLang.Nodes.Statements
 {
     /// <summary>
-    /// An <c>return</c> statement, which returns a value (or nothing)
+    /// A <c>return</c> statement, which returns a value (or nothing)
     /// </summary>
     public class ReturnStatement(Expression? value) : Statement
     {
