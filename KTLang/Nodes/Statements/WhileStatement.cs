@@ -7,7 +7,7 @@ using System.Text;
 namespace KTLang.Nodes.Statements
 {
     /// <summary>
-    /// An <c>while</c> statement, which runs while the condition is true.
+    /// A <c>while</c> statement, which runs while the condition is true.
     /// </summary>
     public class WhileStatement(Expression condition, Statement body) : Statement
     {
