@@ -53,6 +53,9 @@ namespace KTLang.Runtime
             if (expr is LiteralExpression literal)
                 return literal.Value;
 
+            if (expr is UnaryExpression unary)
+                return EvalUnaryExpr(unary);
+
             if (expr is VariableExpression var)
                 return EvalVarExpr(var);
 
@@ -158,6 +161,29 @@ namespace KTLang.Runtime
             finally
             {
                 _env = previous;
+            }
+        }
+
+        private KTLangType? EvalUnaryExpr(UnaryExpression unary)
+        {
+            var value = Evaluate(unary.Right);
+
+            switch (unary.Operator.Type)
+            {
+                case TokenType.Subtract:
+                    if (value is KTLangNumber num)
+                        return new KTLangNumber(-num.Value);
+
+                    throw new Exception("Cannot negate non-number type");
+
+                case TokenType.Exclamation:
+                    if (value is KTLangBoolean boolean)
+                        return new KTLangBoolean(!boolean.Value);
+
+                    throw new Exception("Cannot negate non-boolean type");
+
+                default:
+                    throw new Exception("Invalid operator");
             }
         }
 
