@@ -49,6 +49,12 @@ namespace KTLang.Runtime.Types
             return last;
         }
 
+        /// <summary>
+        /// Clears the array.
+        /// </summary>
+        public void Clear()
+            => _values.Clear();
+
         /// <inheritdoc/>
         public override bool Equals(object? obj)
             => ReferenceEquals(this, obj);
@@ -102,6 +108,10 @@ namespace KTLang.Runtime.Types
 
                         throw new Exception("Cannot index using non-number type");
                     }
+
+                case "clear":
+                    Clear();
+                    return null;
 
                 default:
                     throw new Exception($"Invalid method name '{method}'");
