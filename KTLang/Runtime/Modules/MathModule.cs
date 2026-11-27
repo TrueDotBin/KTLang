@@ -25,6 +25,10 @@ namespace KTLang.Runtime.Modules
 
             Environment.Define("sqrt", new KTLangFunction(SquareRoot), true);
             Environment.Define("abs", new KTLangFunction(Absolute), true);
+            Environment.Define("floor", new KTLangFunction(Floor), true);
+            Environment.Define("ceil", new KTLangFunction(Ceiling), true);
+            Environment.Define("round", new KTLangFunction(Round), true);
+            Environment.Define("pow", new KTLangFunction(Power), true);
         }
 
         private static KTLangNumber SquareRoot(List<KTLangType?> args, IHost _)
@@ -51,6 +55,59 @@ namespace KTLang.Runtime.Modules
                 return new(Math.Abs(number.Value));
 
             throw new Exception("Cannot get absolute value of specified type, must be number");
+        }
+
+        private static KTLangNumber Floor(List<KTLangType?> args, IHost _)
+        {
+            if (args.Count == 0)
+                throw new Exception("math.floor() requires at least one argument");
+
+            var first = args.First();
+
+            if (first is KTLangNumber number)
+                return new(Math.Floor(number.Value));
+
+            throw new Exception("Cannot round down specified type, must be number");
+        }
+
+        private static KTLangNumber Ceiling(List<KTLangType?> args, IHost _)
+        {
+            if (args.Count == 0)
+                throw new Exception("math.ceil() requires at least one argument");
+
+            var first = args.First();
+
+            if (first is KTLangNumber number)
+                return new(Math.Ceiling(number.Value));
+
+            throw new Exception("Cannot round up specified type, must be number");
+        }
+
+        private static KTLangNumber Round(List<KTLangType?> args, IHost _)
+        {
+            if (args.Count == 0)
+                throw new Exception("math.round() requires at least one argument");
+
+            var first = args.First();
+
+            if (first is KTLangNumber number)
+                return new(Math.Round(number.Value));
+
+            throw new Exception("Cannot round specified type, must be number");
+        }
+
+        private static KTLangNumber Power(List<KTLangType?> args, IHost _)
+        {
+            if (args.Count < 2)
+                throw new Exception("math.power() requires at least two argument");
+
+            var first = args[0];
+            var second = args[1];
+
+            if (first is KTLangNumber firstNum && second is KTLangNumber power)
+                return new(Math.Pow(firstNum.Value, power.Value));
+
+            throw new Exception("Cannot calculate power of specified type, must be number");
         }
     }
 }

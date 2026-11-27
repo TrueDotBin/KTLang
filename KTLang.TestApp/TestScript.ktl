@@ -17,8 +17,21 @@ fn mathModuleTest()
 	var squareRoot = math.sqrt(sampleNumber);
 	var absolute = math.abs(sampleNegativeNumber);
 
+	var decimalNum = 15.5;
+	var floored = math.floor(decimalNum);
+	var ceilinged = math.ceil(decimalNum);
+	var rounded = math.round(decimalNum);
+
+	var power = math.pow(sampleNumber, 2);
+
 	println("The square root of", sampleNumber, "is", squareRoot);
 	println("The absolute value of", sampleNegativeNumber, "is", absolute);
+
+	println(decimalNum, "rounded down is", floored);
+	println(decimalNum, "rounded up is", ceilinged);
+	println(decimalNum, "rounded is", rounded);
+
+	println(sampleNumber, "to the power of two is", power);
 }
 
 fn log(source, message)
