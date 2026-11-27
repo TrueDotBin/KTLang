@@ -72,7 +72,7 @@ namespace KTLang.Runtime.Types
         }
 
         /// <inheritdoc/>
-        public override KTLangType? CallMethod(string method, List<KTLangType?> args)
+        public override KTLangType? CallMethod(Interpreter _, string method, List<KTLangType?> args, IHost __)
         {
             switch (method)
             {

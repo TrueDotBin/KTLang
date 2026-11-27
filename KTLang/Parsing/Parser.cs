@@ -81,6 +81,9 @@ namespace KTLang.Parsing
 
         private Statement Statement()
         {
+            if (Match(TokenType.Import))
+                return Import();
+
             if (Match(TokenType.If))
                 return If();
 
@@ -94,6 +97,16 @@ namespace KTLang.Parsing
                 return Return();
 
             return ExpressionStatement();
+        }
+
+        private ImportStatement Import()
+        {
+            // yes that's literally it
+
+            var name = Consume(TokenType.Identifier, "Expected module name");
+            Consume(TokenType.Semicolon, "Expected ';' after module name");
+
+            return new ImportStatement(name);
         }
 
         private ReturnStatement Return()

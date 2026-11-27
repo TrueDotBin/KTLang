@@ -1,33 +1,53 @@
-﻿using KTLang.Exceptions;
+﻿using KTLang.Builtins;
+using KTLang.Exceptions;
 using KTLang.Nodes.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Linq;
+using static KTLang.Builtins.BuiltinsRegistry;
 
 namespace KTLang.Runtime.Types
 {
     /// <summary>
     /// A definition of a function.
     /// </summary>
-    public sealed class KTLangFunction(FunctionExpression function, KTLangEnvironment closure) : KTLangType
+    public sealed class KTLangFunction(FunctionExpression? function, KTLangEnvironment? closure) : KTLangType
     {
         /// <summary>
         /// The function's expression that gets resolved when the function is called.
         /// </summary>
-        public FunctionExpression Function { get; } = function;
+        public FunctionExpression? Function { get; } = function;
 
         /// <summary>
         /// The scope where the function was defined.
         /// </summary>
-        public KTLangEnvironment Closure { get; } = closure;
+        public KTLangEnvironment? Closure { get; } = closure;
+
+        private KTLangNativeFunction? _native;
+
+        /// <summary>
+        /// Creates a new function type using a native function.
+        /// </summary>
+        public KTLangFunction(KTLangNativeFunction native) : this(null, null)
+        {
+            _native = native;
+        }
 
         /// <summary>
         /// Calls the function.
         /// </summary>
         public KTLangType? Call(Interpreter interpreter, List<KTLangType?> args, IHost host)
         {
+            if (Function is null)
+            {
+                if (_native is not null)
+                    return _native(args, host);
+
+                throw new Exception("Cannot call native function when it is null");
+            }
+
             if (args.Count != Function.Definition.Parameters.Count)
                 throw new Exception($"Expected {Function.Definition.Parameters.Count} arguments but got {args.Count}");
 
@@ -55,6 +75,6 @@ namespace KTLang.Runtime.Types
 
         /// <inheritdoc/>
         public override string ToString()
-            => $"function {Function.Definition.Name?.RawString}";
+            => $"function {Function?.Definition.Name?.RawString}";
     }
 }

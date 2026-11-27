@@ -4,6 +4,7 @@ using KTLang.Nodes.Statements;
 using KTLang.Parsing;
 using KTLang.Runtime;
 using KTLang.Tokenizer;
+using System.Runtime.InteropServices;
 
 namespace KTLang.TestApp
 {
@@ -13,8 +14,11 @@ namespace KTLang.TestApp
         {
             try
             {
+            #if DEBUG
+                var debug = true;
+            #else
                 var debug = args.Contains("--debug");
-
+            #endif
 
                 var source = File.ReadAllText("TestScript.ktl");
                 Console.WriteLine("[Lexer] Tokenizing input");
@@ -53,6 +57,8 @@ namespace KTLang.TestApp
 
                 var host = new SampleHost();
                 var interpreter = new Interpreter(host);
+                interpreter.RegisterDefaultModules();
+
                 interpreter.Interpret(statements);
             }
             catch (Exception ex)

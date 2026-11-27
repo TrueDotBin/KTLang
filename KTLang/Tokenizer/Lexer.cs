@@ -26,7 +26,8 @@ namespace KTLang.Tokenizer
             { "fn", TokenType.Fn },
             { "true", TokenType.True },
             { "false", TokenType.False },
-            { "while", TokenType.While }
+            { "while", TokenType.While },
+            { "import", TokenType.Import }
         };
 
         /// <summary>

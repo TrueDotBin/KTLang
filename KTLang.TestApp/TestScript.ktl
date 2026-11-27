@@ -1,5 +1,19 @@
 ﻿# This is a comment.
 
+fn mathModuleTest()
+{
+	import math;
+
+	println("pi =", math.PI);
+	println("e =", math.E);
+	println("tau =", math.TAU);
+
+	var sampleNumber = 50;
+	var squareRoot = math.sqrt(sampleNumber);
+
+	println("The square root of", sampleNumber, "is", squareRoot);
+}
+
 fn log(source, message)
 {
 	println("[" + source + "]", message);
@@ -131,5 +145,8 @@ stringTest();
 
 log("Conversion", "Testing number-to-string and string-to-number conversion");
 conversionTest();
+
+log("Modules", "Testing math module");
+mathModuleTest();
 
 log("Tests", "Finished!");

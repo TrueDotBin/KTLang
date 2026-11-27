@@ -18,7 +18,7 @@ namespace KTLang.Runtime.Types
         /// <summary>
         /// Calls a method on this type.
         /// </summary>
-        public virtual KTLangType? CallMethod(string method, List<KTLangType?> args)
+        public virtual KTLangType? CallMethod(Interpreter interpreter, string method, List<KTLangType?> args, IHost host)
             => throw new Exception("This type has no methods");
     }
 }

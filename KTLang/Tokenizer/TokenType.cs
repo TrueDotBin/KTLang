@@ -144,6 +144,7 @@ namespace KTLang.Tokenizer
         /// </summary>
         False,
 
+        Import,
         Var, Const,
         If, Else,
         While,

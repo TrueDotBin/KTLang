@@ -72,6 +72,10 @@ namespace KTLang.TestApp
                 Console.WriteLine($"{indent}Return:");
                 PrintAst(returnStmt.Value, indent + "    ");
             }
+            else if (stmt is ImportStatement importStmt)
+            {
+                Console.WriteLine($"{indent}Import: {importStmt.Name?.RawString}");
+            }
         }
 
         public static void PrintAst(Expression expr, string indent = "")

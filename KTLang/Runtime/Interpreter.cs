@@ -2,6 +2,7 @@
 using KTLang.Exceptions;
 using KTLang.Nodes.Expressions;
 using KTLang.Nodes.Statements;
+using KTLang.Runtime.Modules;
 using KTLang.Runtime.Types;
 using KTLang.Tokenizer;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -15,6 +16,34 @@ namespace KTLang.Runtime
     {
         private IHost _host = host;
         private KTLangEnvironment _env = new();
+        
+        private readonly Dictionary<string, KTLangModule> _modules = [];
+
+        /// <summary>
+        /// Registers a module's functions and variables.
+        /// </summary>
+        public void RegisterModule(KTLangModule module)
+        {
+            if (_modules.Any(m => m.Key == module.Name))
+                throw new Exception($"Cannot register already registered module '{module.Name}'");
+
+            _modules[module.Name] = module;
+            module.Register();
+        }
+
+        /// <summary>
+        /// Registers KTLang's default modules.
+        /// </summary>
+        public void RegisterDefaultModules()
+        {
+            RegisterModule(new MathModule());
+        }
+
+        /// <summary>
+        /// Gets a module by its name.
+        /// </summary>
+        public KTLangModule? GetModule(string name)
+            => _modules.GetValueOrDefault(name);
 
         /// <summary>
         /// Returns the actual value of an expression.
@@ -89,6 +118,12 @@ namespace KTLang.Runtime
             if (statement is ReturnStatement ret)
             {
                 ExecReturnStatement(ret);
+                return;
+            }
+
+            if (statement is ImportStatement import)
+            {
+                ExecImportStatement(import);
                 return;
             }
 
@@ -243,7 +278,7 @@ namespace KTLang.Runtime
             foreach (var arg in call.Args)
                 args.Add(Evaluate(arg));
 
-            return target.CallMethod(name, args);
+            return target.CallMethod(this, name, args, _host);
         }
 
         private KTLangType? EvalMemberExpr(MemberExpression member)
@@ -321,6 +356,19 @@ namespace KTLang.Runtime
                 value = Evaluate(ret.Value);
 
             throw new ReturnException(value);
+        }
+
+        private void ExecImportStatement(ImportStatement import)
+        {
+            var name = import.Name?.RawString;
+
+            if (string.IsNullOrEmpty(name))
+                return;
+
+            var mod = GetModule(name) ?? throw new Exception($"Module '{name}' is not registered");
+            var modType = new KTLangModuleType(mod);
+
+            _env.Define(name, modType, true);
         }
 
         private void ExecFuncStatement(FunctionStatement func)

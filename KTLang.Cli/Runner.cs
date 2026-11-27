@@ -12,7 +12,7 @@ namespace KTLang.Cli
     /// </summary>
     public static class Runner
     {
-        private static Interpreter _globalInterpreter = new(new DefaultHost());
+        private static readonly Interpreter _globalInterpreter = new(new DefaultHost());
 
         private static void RunLine(string line, Interpreter interpreter)
         {
@@ -20,6 +20,11 @@ namespace KTLang.Cli
             var statements = new Parser(tokens).Parse();
 
             interpreter.Interpret(statements);
+        }
+
+        static Runner()
+        {
+            _globalInterpreter.RegisterDefaultModules();
         }
 
         /// <summary>
@@ -49,6 +54,7 @@ namespace KTLang.Cli
             Console.WriteLine();
 
             var interpreter = new Interpreter(new DefaultHost());
+            interpreter.RegisterDefaultModules();
 
             while (true)
             {
