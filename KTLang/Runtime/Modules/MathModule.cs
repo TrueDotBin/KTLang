@@ -29,6 +29,9 @@ namespace KTLang.Runtime.Modules
             Environment.Define("ceil", new KTLangFunction(Ceiling), true);
             Environment.Define("round", new KTLangFunction(Round), true);
             Environment.Define("pow", new KTLangFunction(Power), true);
+            Environment.Define("min", new KTLangFunction(Min), true);
+            Environment.Define("max", new KTLangFunction(Max), true);
+            Environment.Define("clamp", new KTLangFunction(Clamp), true);
         }
 
         private static KTLangNumber SquareRoot(List<KTLangType?> args, IHost _)
@@ -99,7 +102,7 @@ namespace KTLang.Runtime.Modules
         private static KTLangNumber Power(List<KTLangType?> args, IHost _)
         {
             if (args.Count < 2)
-                throw new Exception("math.power() requires at least two argument");
+                throw new Exception("math.power() requires at least two arguments");
 
             var first = args[0];
             var second = args[1];
@@ -108,6 +111,49 @@ namespace KTLang.Runtime.Modules
                 return new(Math.Pow(firstNum.Value, power.Value));
 
             throw new Exception("Cannot calculate power of specified type, must be number");
+        }
+
+        private static KTLangNumber Min(List<KTLangType?> args, IHost _)
+        {
+            if (args.Count < 2)
+                throw new Exception("math.min() requires at least two arguments");
+
+            var first = args[0];
+            var second = args[1];
+
+            if (first is KTLangNumber firstNum && second is KTLangNumber secondNum)
+                return new(Math.Min(firstNum.Value, secondNum.Value));
+
+            throw new Exception("Cannot compare specified types, must be number");
+        }
+
+        private static KTLangNumber Max(List<KTLangType?> args, IHost _)
+        {
+            if (args.Count < 2)
+                throw new Exception("math.max() requires at least two arguments");
+
+            var first = args[0];
+            var second = args[1];
+
+            if (first is KTLangNumber firstNum && second is KTLangNumber secondNum)
+                return new(Math.Max(firstNum.Value, secondNum.Value));
+
+            throw new Exception("Cannot compare specified types, must be number");
+        }
+
+        private static KTLangNumber Clamp(List<KTLangType?> args, IHost _)
+        {
+            if (args.Count < 3)
+                throw new Exception("math.clamp() requires at least three arguments");
+
+            var first = args[0];
+            var second = args[1];
+            var third = args[2];
+
+            if (first is KTLangNumber firstNum && second is KTLangNumber min && third is KTLangNumber max)
+                return new(Math.Clamp(firstNum.Value, min.Value, max.Value));
+
+            throw new Exception("Cannot clamp specified types, must be number");
         }
     }
 }

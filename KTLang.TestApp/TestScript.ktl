@@ -32,6 +32,14 @@ fn mathModuleTest()
 	println(decimalNum, "rounded is", rounded);
 
 	println(sampleNumber, "to the power of two is", power);
+
+	var max = math.max(50, 20);
+	var min = math.min(10, 20);
+	var clamped = math.clamp(50, 0, 100);
+
+	println("The maximum of 50 and 20 is", max);
+	println("The minimum of 10 and 20 is", min);
+	println("50 clamped to 0 and 100 is", clamped);
 }
 
 fn log(source, message)
