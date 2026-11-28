@@ -1,5 +1,26 @@
 ﻿# This is a comment.
 
+fn randomModuleTest()
+{
+	import random;
+
+	var next = random.next();
+	var range = random.range(0, 10);
+	var arr = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+
+	var choice = random.choice(arr);
+	var shuffled = random.shuffle(arr);
+
+	var boolean = random.boolean();
+
+	println("next =", next);
+	println("range (0 - 10) =", range);
+	println("arr =", arr);
+	println("next =", choice);
+	println("shuffled =", shuffled);
+	println("boolean =", boolean);
+}
+
 fn stringModuleTest()
 {
 	import string;
@@ -222,5 +243,8 @@ mathModuleTest();
 
 log("Modules", "Testing string module");
 stringModuleTest();
+
+log("Modules", "Testing random module");
+randomModuleTest();
 
 log("Tests", "Finished!");

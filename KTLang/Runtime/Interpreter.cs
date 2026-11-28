@@ -38,6 +38,7 @@ namespace KTLang.Runtime
         {
             RegisterModule(new MathModule());
             RegisterModule(new StringModule());
+            RegisterModule(new RandomModule());
         }
 
         /// <summary>
