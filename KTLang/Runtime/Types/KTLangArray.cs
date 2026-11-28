@@ -55,6 +55,12 @@ namespace KTLang.Runtime.Types
         public void Clear()
             => _values.Clear();
 
+        /// <summary>
+        /// Gets the read-only list representation of this array.
+        /// </summary>
+        public IReadOnlyList<KTLangType?> GetList()
+            => _values.AsReadOnly();
+
         /// <inheritdoc/>
         public override bool Equals(object? obj)
             => ReferenceEquals(this, obj);

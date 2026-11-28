@@ -1,5 +1,45 @@
 ﻿# This is a comment.
 
+fn stringModuleTest()
+{
+	import string;
+
+	var sample = "Hello, world!";
+	var reversed = string.reverse(sample);
+	var trimmable = "Hello,    world!";
+	var trimmed = string.trim(trimmable);
+	var upper = string.upper(sample);
+	var lower = string.lower(sample);
+	var repeated = string.repeat(sample, 5);
+
+	println("sample =", sample);
+	println("reversed =", reversed);
+	println("trimmable =", trimmable);
+	println("trimmed =", trimmed);
+	println("upper =", upper);
+	println("lower =", lower);
+	println("repeated =", repeated);
+
+	if string.contains(sample, "Hello")
+	{
+		println("Sample string contains 'Hello'");
+	}
+
+	if string.startsWith(sample, "H")
+	{
+		println("Sample string starts with 'H'");
+	}
+
+	if string.endsWith(sample, "!")
+	{
+		println("Sample string ends with '!'");
+	}
+
+	var arr = [10, 20, 40, 80];
+	var joined = string.join(arr, " -> ");
+	println("joined =", joined);
+}
+
 fn mathModuleTest()
 {
 	import math;
@@ -176,5 +216,8 @@ conversionTest();
 
 log("Modules", "Testing math module");
 mathModuleTest();
+
+log("Modules", "Testing string module");
+stringModuleTest();
 
 log("Tests", "Finished!");

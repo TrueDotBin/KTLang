@@ -37,6 +37,7 @@ namespace KTLang.Runtime
         public void RegisterDefaultModules()
         {
             RegisterModule(new MathModule());
+            RegisterModule(new StringModule());
         }
 
         /// <summary>
