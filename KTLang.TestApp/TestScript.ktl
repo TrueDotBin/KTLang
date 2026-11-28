@@ -38,6 +38,9 @@ fn stringModuleTest()
 	var arr = [10, 20, 40, 80];
 	var joined = string.join(arr, " -> ");
 	println("joined =", joined);
+
+	var split = string.split(joined, " -> ");
+	println("split =", split);
 }
 
 fn mathModuleTest()
