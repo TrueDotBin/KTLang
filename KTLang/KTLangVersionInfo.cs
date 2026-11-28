@@ -12,6 +12,6 @@ namespace KTLang
         /// <summary>
         /// The current version's string.
         /// </summary>
-        public const string VersionString = "1.2.0";
+        public const string VersionString = "1.3.0";
     }
 }
